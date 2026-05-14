@@ -3,7 +3,7 @@ package com.lmax.solana4j.encoding;
 import com.lmax.solana4j.api.MessageVisitor;
 import java.nio.ByteBuffer;
 
-final class MessageToSignVisitor implements MessageVisitor<byte[]> {
+public final class MessageToSignVisitor implements MessageVisitor<byte[]> {
   @Override
   public byte[] visit(MessageView view) {
     // get unsigned message ByteBuffer(only for sign message,
