@@ -1,4 +1,0 @@
-rootProject.name = 'solana4j'
-include 'message-encoding'
-include 'client'
-include 'shared'
