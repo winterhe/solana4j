@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"m":"com.lmax.solana4j.client","l":"com.lmax.solana4j.client"},{"m":"com.lmax.solana4j.client","l":"com.lmax.solana4j.client.api"},{"m":"com.lmax.solana4j.client","l":"com.lmax.solana4j.client.jsonrpc"}]

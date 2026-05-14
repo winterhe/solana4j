@@ -1,0 +1,4 @@
+module:com.lmax.solana4j.client
+com.lmax.solana4j.client
+com.lmax.solana4j.client.api
+com.lmax.solana4j.client.jsonrpc
