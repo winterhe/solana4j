@@ -16,6 +16,13 @@ public interface SolanaClientOptionalParams
     void addParam(String key, Object value);
 
     /**
+     * add or override default params
+     * @param key   the name of the parameter to add (e.g., "commitment", "encoding")
+     * @param value the value of the parameter, which can be any supported data type
+     */
+    void addParamBaseDefault(final String key, final Object value);
+
+    /**
      * Returns all the optional parameters as a map.
      *
      * @return a map containing all the key-value pairs for optional parameters

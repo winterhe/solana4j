@@ -21,6 +21,15 @@ public final class SolanaJsonRpcClientOptionalParams implements SolanaClientOpti
     }
 
     @Override
+    public void addParamBaseDefault(final String key, final Object value)
+    {
+      if (optionalParams.isEmpty()) {
+        optionalParams.putAll(defaultOptionalParams());
+      }
+      optionalParams.put(key, value);
+    }
+
+    @Override
     public Map<String, Object> getParams()
     {
         return optionalParams;
