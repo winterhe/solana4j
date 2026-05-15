@@ -307,11 +307,15 @@ public final class SystemProgram
         + Long.BYTES
         + PublicKey.PUBLIC_KEY_LENGTH;
 
+    boolean isSigner = !fromPublicKey.equals(base);
+
     return Solana.instruction(ib -> ib
         .program(SYSTEM_PROGRAM_ACCOUNT)
         .account(fromPublicKey, true, true)
         .account(accountWithSeed, false, true)
-        .account(base, false, false)
+        // if base not same as payer(fromPublicKey),
+        // then base must sign the transaction(ReadOnlySigner)
+        .account(base, isSigner, false)
         .data(dateLength, bb ->
         {
           // 1. 指令类型 (3 = CreateAccountWithSeed) - 4字节小端
