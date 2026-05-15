@@ -102,6 +102,20 @@ public final class SolanaEncoding
     }
 
     /**
+     * Creates account key with seed.
+     * @param base base account
+     * @param seed seed bytes
+     * @param programId owner
+     * @return a new instance of {@link PublicKey}
+     */
+    public static PublicKey createWithSeed(final PublicKey base,
+        final String seed,
+        final PublicKey programId)
+    {
+      return SolanaAccount.createWithSeed(base, seed, programId);
+    }
+
+    /**
      * Derives a program address from the given seeds and program id.
      *
      * @param seeds     the list of byte arrays representing the seeds

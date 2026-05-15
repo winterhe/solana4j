@@ -108,6 +108,20 @@ public final class Solana
     }
 
     /**
+     * Creates account key with seed.
+     * @param base base account
+     * @param seed seed bytes
+     * @param programId owner
+     * @return a new instance of {@link PublicKey}
+     */
+    public static PublicKey createWithSeed(final PublicKey base,
+        final String seed,
+        final PublicKey programId)
+    {
+      return SolanaEncoding.createWithSeed(base, seed, programId);
+    }
+
+    /**
      * Creates an address lookup table for the given lookup table address and list of addresses.
      *
      * @param lookupTableAddress the public key of the lookup table
