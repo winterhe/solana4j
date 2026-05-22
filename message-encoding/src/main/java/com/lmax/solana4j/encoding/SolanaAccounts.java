@@ -144,7 +144,11 @@ final class SolanaAccounts implements Accounts
             }
         }
 
-        return new ArrayList<>(staticAccountReferences.values());
+        // resort staticAccountReferences,
+        // for sometimes some signer may be read only(in spl-token)
+        // so it need resort signer again(signer+w, signer, w, r)
+        //return new ArrayList<>(staticAccountReferences.values());
+        return resortAccountReferences(staticAccountReferences);
     }
 
     private static List<TransactionInstruction.AccountReference> concatAccountReferences(
@@ -165,7 +169,26 @@ final class SolanaAccounts implements Accounts
                             .sorted(cmp)).collect(Collectors.toList());
     }
 
-    private static TransactionInstruction.AccountReference merge(
+  private static List<TransactionInstruction.AccountReference> resortAccountReferences(
+      final LinkedHashMap<PublicKey, TransactionInstruction.AccountReference> mergedReferences)
+  {
+    final Comparator<TransactionInstruction.AccountReference> comparator =
+        Comparator
+        // priority 1: Writable Signer
+        .comparingInt(r -> {
+          if (r.isSigner() && r.isWriter()) return 0;   // 1. Writable Signer
+          if (r.isSigner()) return 1;                   // 2. Readonly Signer
+          if (r.isWriter()) return 2;                   // 3. Writable Non-Signer
+          return 3;                                     // 4. Readonly Non-Signer
+        });
+
+    return (new ArrayList<>(mergedReferences.values()))
+            .stream()
+            .sorted(comparator)
+            .toList();
+  }
+
+  private static TransactionInstruction.AccountReference merge(
             final TransactionInstruction.AccountReference accountReference,
             final TransactionInstruction.AccountReference accountReference2)
     {
